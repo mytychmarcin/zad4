@@ -17,23 +17,53 @@ class Main {
       Scanner scanner = new Scanner(System.in);
 
       while (true) {
-        System.out.print("imie: ");
-        String imie = scanner.nextLine();
-        if (imie.isEmpty())
-          break;
+        System.out.println("1.dodaj");
+        System.out.println("2.wypisz wszystkich studentów");
+        System.out.println("3.wyjście");
+        String wybor = scanner.nextLine();
 
-        System.out.print("wiek: ");
-        int wiek = Integer.parseInt(scanner.nextLine());
+        switch (wybor) {
+          case "1":
+            System.out.print("imię: ");
+            String imie = scanner.nextLine();
+            if (imie.isEmpty()) {
+              System.out.println("nie moze byc puste");
+              break;
+            }
 
-        Student student = new Student(imie, wiek);
-        s.addStudent(student);
-        System.out.println("dodano studenta: " + student.ToString());
-      }
+            System.out.print("wiek: ");
+            int wiek;
+            try {
+              wiek = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+              System.out.println("musi byc liczba");
+              break;
+            }
 
-      var students = s.getStudents();
-      System.out.println("\nLista wszystkich studentów:");
-      for (Student current : students) {
-        System.out.println(current.ToString());
+            Student student = new Student(imie, wiek);
+            s.addStudent(student);
+            System.out.println("dodano studenta " + student.ToString());
+            break;
+
+          case "2":
+            var students = s.getStudents();
+            if (students.isEmpty()) {
+              System.out.println("pusto");
+            } else {
+              System.out.println("\nlista studentów:");
+              for (Student current : students) {
+                System.out.println(current.ToString());
+              }
+            }
+            break;
+
+          case "3":
+            System.out.println("koniec");
+            return;
+
+          default:
+            System.out.println("błąd");
+        }
       }
 
     } catch (IOException e) {
