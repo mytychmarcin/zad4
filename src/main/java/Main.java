@@ -4,7 +4,7 @@ Kod bazowy programu Commit4_0:
 • Studenci dodawani są w klasie Main.
 • Wszyscy studenci są wypisywani na końcu klasy Main.
 • Klasa Service obsługuje odczyt i zapis do pliku bazy danych.
-• Klasa Student reprezentuje pojedynczego studenta (Imię, Wiek).
+• Klasa Student reprezentuje pojedynczego studenta (Imię, Nazwisko, Wiek).
 */
 
 import java.io.IOException;
@@ -27,7 +27,14 @@ class Main {
             System.out.print("imię: ");
             String imie = scanner.nextLine();
             if (imie.isEmpty()) {
-              System.out.println("nie moze byc puste");
+              System.out.println("musi byc imie");
+              break;
+            }
+
+            System.out.print("nazwisko: ");
+            String nazwisko = scanner.nextLine();
+            if (nazwisko.isEmpty()) {
+              System.out.println("musi byc nazwisko");
               break;
             }
 
@@ -40,9 +47,9 @@ class Main {
               break;
             }
 
-            Student student = new Student(imie, wiek);
+            Student student = new Student(imie, nazwisko, wiek);
             s.addStudent(student);
-            System.out.println("dodano studenta " + student.ToString());
+            System.out.println("dodano studenta: " + student.ToString());
             break;
 
           case "2":
