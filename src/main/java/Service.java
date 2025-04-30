@@ -43,4 +43,32 @@ class Service {
 
     return foundStudents;
   }
+
+  public boolean removeStudent(String imie, String nazwisko) throws IOException {
+    List<Student> students = getStudents();
+    List<Student> studentsToKeep = new ArrayList<>();
+
+    boolean studentFound = false;
+
+    for (Student student : students) {
+      if (student.getImie().equalsIgnoreCase(imie) && student.getNazwisko().equalsIgnoreCase(nazwisko)) {
+        studentFound = true;
+      } else {
+        studentsToKeep.add(student);
+      }
+    }
+
+    if (studentFound) {
+
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
+        for (Student student : studentsToKeep) {
+          writer.write(student.getImie() + "," + student.getNazwisko() + "," + student.getWiek() + ","
+              + student.getDataUrodzenia());
+          writer.newLine();
+        }
+      }
+    }
+
+    return studentFound;
+  }
 }

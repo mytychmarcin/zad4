@@ -11,7 +11,8 @@ class Main {
         System.out.println("1.dodaj");
         System.out.println("2.wypisz wszystkich studentów");
         System.out.println("3.wyszukaj studenta po imieniu");
-        System.out.println("4.wyjście");
+        System.out.println("4.usun studenta po imieniu i nazwisku");
+        System.out.println("5.wyjście");
         String wybor = scanner.nextLine();
 
         switch (wybor) {
@@ -39,11 +40,11 @@ class Main {
               break;
             }
 
-            System.out.print("data urodzenia (rok-miesiac-dzien): ");
+            System.out.print("data urodzenia rok-miesiac-dzien: ");
             String dataUrodzenia = scanner.nextLine();
 
             if (!dataUrodzenia.matches("\\d{4}-\\d{2}-\\d{2}")) {
-              System.out.println("rok-miesiac-dzien");
+              System.out.println("musi byc rok-miesiac-dzien");
               break;
             }
 
@@ -53,7 +54,7 @@ class Main {
             int day = Integer.parseInt(parts[2]);
 
             if (year < 1900 || month < 1 || month > 12 || day < 1 || day > 31) {
-              System.out.println("Niepoprawna data");
+              System.out.println("niepoprawna data");
               break;
             }
 
@@ -75,13 +76,13 @@ class Main {
             break;
 
           case "3":
-            System.out.print("Podaj imię studenta: ");
+            System.out.print("podaj imie studenta do wyszukania ");
             String szukaneImie = scanner.nextLine();
             var foundStudents = s.getStudentsByName(szukaneImie);
             if (foundStudents.isEmpty()) {
-              System.out.println("Nie znaleziono studenta o imieniu: " + szukaneImie);
+              System.out.println("ni ma  " + szukaneImie);
             } else {
-              System.out.println("Znaleziony student:");
+              System.out.println("znaleziono:");
               for (Student current : foundStudents) {
                 System.out.println(current.toString());
               }
@@ -89,6 +90,21 @@ class Main {
             break;
 
           case "4":
+            System.out.print("podaj imie studenta ktorego chcesz usunac ");
+            String imieDoUsuniecia = scanner.nextLine();
+
+            System.out.print("podaj nazwisko studenta ktorego chcesz usunac: ");
+            String nazwiskoDoUsuniecia = scanner.nextLine();
+
+            boolean removed = s.removeStudent(imieDoUsuniecia, nazwiskoDoUsuniecia);
+            if (removed) {
+              System.out.println("Student " + imieDoUsuniecia + " " + nazwiskoDoUsuniecia + " został usunięty.");
+            } else {
+              System.out.println("ni ma");
+            }
+            break;
+
+          case "5":
             System.out.println("koniec");
             return;
 
