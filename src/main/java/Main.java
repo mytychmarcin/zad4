@@ -10,7 +10,8 @@ class Main {
       while (true) {
         System.out.println("1.dodaj");
         System.out.println("2.wypisz wszystkich studentów");
-        System.out.println("3.wyjście");
+        System.out.println("3.wyszukaj studenta po imieniu");
+        System.out.println("4.wyjście");
         String wybor = scanner.nextLine();
 
         switch (wybor) {
@@ -38,11 +39,11 @@ class Main {
               break;
             }
 
-            System.out.print("data urodzenia (RRRR-MM-DD): ");
+            System.out.print("data urodzenia (rok-miesiac-dzien): ");
             String dataUrodzenia = scanner.nextLine();
 
             if (!dataUrodzenia.matches("\\d{4}-\\d{2}-\\d{2}")) {
-              System.out.println("Data urodzenia musi być w formacie RRRR-MM-DD");
+              System.out.println("rok-miesiac-dzien");
               break;
             }
 
@@ -52,13 +53,12 @@ class Main {
             int day = Integer.parseInt(parts[2]);
 
             if (year < 1900 || month < 1 || month > 12 || day < 1 || day > 31) {
-              System.out.println("Niepoprawna wartość daty (rok, miesiąc lub dzień poza zakresem).");
+              System.out.println("Niepoprawna data");
               break;
             }
 
-            // Tworzymy obiekt studenta z datą urodzenia
             Student student = new Student(imie, nazwisko, wiek, dataUrodzenia);
-            s.addStudent(student); // Dodajemy studenta do bazy danych
+            s.addStudent(student);
             System.out.println("dodano studenta: " + student.toString());
             break;
 
@@ -75,6 +75,20 @@ class Main {
             break;
 
           case "3":
+            System.out.print("Podaj imię studenta: ");
+            String szukaneImie = scanner.nextLine();
+            var foundStudents = s.getStudentsByName(szukaneImie);
+            if (foundStudents.isEmpty()) {
+              System.out.println("Nie znaleziono studenta o imieniu: " + szukaneImie);
+            } else {
+              System.out.println("Znaleziony student:");
+              for (Student current : foundStudents) {
+                System.out.println(current.toString());
+              }
+            }
+            break;
+
+          case "4":
             System.out.println("koniec");
             return;
 

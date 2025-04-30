@@ -30,4 +30,17 @@ class Service {
     }
     return students;
   }
+
+  public List<Student> getStudentsByName(String name) throws IOException {
+    List<Student> foundStudents = new ArrayList<>();
+    List<Student> students = getStudents();
+
+    for (Student student : students) {
+      if (student.getImie().equalsIgnoreCase(name)) {
+        foundStudents.add(student);
+      }
+    }
+
+    return foundStudents;
+  }
 }
