@@ -1,35 +1,34 @@
-public class Student {
+class Student {
+  private String imie;
+  private String nazwisko;
+  private int wiek;
+  private String dataUrodzenia;
 
-  private String Name;
-  private String Surname;
-  private int Age;
-
-  public Student(String name, String surname, int age) {
-    Name = name;
-    Surname = surname;
-    Age = age;
+  public Student(String imie, String nazwisko, int wiek, String dataUrodzenia) {
+    this.imie = imie;
+    this.nazwisko = nazwisko;
+    this.wiek = wiek;
+    this.dataUrodzenia = dataUrodzenia;
   }
 
-  public String GetName() {
-    return Name;
+  public String getImie() {
+    return imie;
   }
 
-  public String GetSurname() {
-    return Surname;
+  public String getNazwisko() {
+    return nazwisko;
   }
 
-  public int GetAge() {
-    return Age;
+  public int getWiek() {
+    return wiek;
   }
 
-  public String ToString() {
-    return Name + " " + Surname + " " + Age;
+  public String getDataUrodzenia() {
+    return dataUrodzenia;
   }
 
-  public static Student Parse(String str) {
-    String[] data = str.split(" ");
-    if (data.length != 3)
-      return new Student("Parse", "Error", -1);
-    return new Student(data[0], data[1], Integer.parseInt(data[2]));
+  @Override
+  public String toString() {
+    return imie + " " + nazwisko + " " + wiek + " " + dataUrodzenia;
   }
 }
